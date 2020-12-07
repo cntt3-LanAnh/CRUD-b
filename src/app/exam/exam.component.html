@@ -9,12 +9,12 @@
 			<th> Action</th>
 		</thead>
 		<tbody>
-			<tr *ngFor='let item of users , let i = index'>
+			<tr *ngFor='let item of users , index as i'>
 				<td> {{i+1}}</td>
 				<td><span *ngIf ="idEdit != item.id else elseHiddenName ">
          {{item.name}} </span>
 					<ng-template #elseHiddenName>
-						<input  [value]="item.name | uppercase" [(ngModel)]="nameEdit"/>
+						<input disabled="false" [value]="item.name | uppercase" [(ngModel)]="nameEdit"/>
 
       </ng-template>
 				</td>
@@ -41,11 +41,11 @@
       </ng-template>
 				</td>
 				<td>
-					<button *ngIf ="idEdit != item.id else elseHiddenSave " (click)="edit(item.id)">Edit </button>
+					<button *ngIf ="idEdit != item.id else elseHiddenSave " (click)="edit(item.id, i)">Edit </button>
 					<ng-template #elseHiddenSave>
 						<button (click)="save()"> save</button>
 					</ng-template>
-					<button  (click)="delete(item.id)">Delete</button>
+					<button  (click)="delete(item)">Delete</button>
 				</td>
 
 
@@ -54,7 +54,7 @@
 	</table>
 </div>
 <div>
-	<input  placeholder="id" [(ngModel)]="idAdd">
+	<input disabled="true" placeholder="id" [(ngModel)]="idAdd">
 	<input placeholder="name" [(ngModel)]="nameAdd">
 	<input  placeholder="usename" [(ngModel)]="usernameAdd">
 	<input  placeholder="Email" [(ngModel)]="emailAdd" >

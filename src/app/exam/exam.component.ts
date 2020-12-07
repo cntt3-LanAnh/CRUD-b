@@ -11,28 +11,35 @@ export class ExamComponent implements OnInit {
       id: "1",
       name: "anh",
       username: "lan anh",
-      email: "1223@gmail.com",
+      email: "123@gmail.com",
       address: "09 ha van tinh"
     },
     {
       id: "2",
-      name: "yen",
-      username: "yen pham",
-      email: "1223@gmail.com",
-      address: "09 ha van tinh"
+      name: "ly",
+      username: "ly doan",
+      email: "123@gmail.com",
+      address: "10 ha van tinh"
     },
     {
       id: "3",
-      name: "anh",
-      username: "lan anh",
-      email: "1223@gmail.com",
-      address: "09 ha van tinh"
+      name: "yen",
+      username: "yen pham",
+      email: "234@gmail.com",
+      address: "11 ha van tinh"
     },
     {
       id: "4",
-      name: "anh",
+      name: "hoa",
+      username: "hoan anh",
+      email: "213@gmail.com",
+      address: "11 ha van tinh"
+    },
+    {
+      id: "5",
+      name: "mai",
       username: "lan anh",
-      email: "1223@gmail.com",
+      email: "344@gmail.com",
       address: "09 ha van tinh"
     }
   ];
@@ -46,9 +53,16 @@ export class ExamComponent implements OnInit {
   public usernameAdd = "";
   public emailAdd = "";
   public addressAdd = "";
-  edit(id) {
+
+  clearInput() {
+    this.nameAdd = "";
+    this.usernameAdd = "";
+    this.emailAdd = "";
+    this.addressAdd = "";
+  }
+  edit(id, index) {
     this.idEdit = id;
-    let index = this.users.findIndex(item => item.id == id);
+    // let index = this.users.findIndex(item => item.id == id);
     this.nameEdit = this.users[index].name;
     this.usernameEdit = this.users[index].username;
     this.emailEdit = this.users[index].email;
@@ -64,14 +78,17 @@ export class ExamComponent implements OnInit {
     alert("sua thanh cong");
   }
   delete(item: any) {
+    this.users = this.users.filter(x => x.id !== item.id);
     // console.log(id);
     // this.users = this.users.filter(item => item.id != id);
     // khai bao id can xoa
     // su dng findIndex de  get 1 cai can xoa trong mang
     //splice xoa 1 vi tri trong mang
-    let idDelete = item.id;
-    let index = this.users.findIndex(x => (x.id = idDelete));
-    this.users.splice(idDelete, 1);
+    // let idDelete = item.id;
+    // this.users.splice(idDelete, 1);
+    // if(this.users.length < 1) {
+    //   this.users = []
+    // }
   }
   add() {
     let idNew: string = this.users.length + "";
@@ -83,6 +100,7 @@ export class ExamComponent implements OnInit {
       address: this.addressAdd
     };
     this.users.push(arr);
+    this.clearInput();
   }
 
   constructor() {}
